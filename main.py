@@ -1,10 +1,20 @@
+import argparse
 from core.orchestrator import DevOrchestrator
 
-if __name__ == "__main__":
-    task = "实现一个带缓存的API请求模块，并补充单元测试"
+
+def main():
+    parser = argparse.ArgumentParser(description="Cursor Dev Agent CLI")
+    parser.add_argument("--task", type=str, required=True, help="Development task description")
+
+    args = parser.parse_args()
 
     orchestrator = DevOrchestrator()
-    result = orchestrator.run(task)
+    result = orchestrator.run(args.task)
 
     print("\n=== FINAL RESULT ===")
-    print(result)
+    for k, v in result.items():
+        print(f"\n[{k.upper()}]\n{v}")
+
+
+if __name__ == "__main__":
+    main()
