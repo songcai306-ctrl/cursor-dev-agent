@@ -3,6 +3,7 @@ from agents.coder import CoderAgent
 from agents.reviewer import ReviewerAgent
 from agents.tester import TesterAgent
 
+
 class DevOrchestrator:
     def __init__(self):
         self.planner = PlannerAgent()
@@ -10,22 +11,15 @@ class DevOrchestrator:
         self.reviewer = ReviewerAgent()
         self.tester = TesterAgent()
 
-    def run(self, task):
-        print("Step 1: Planning...")
+    def run(self, task: str):
         plan = self.planner.plan(task)
-
-        print("Step 2: Coding...")
         code = self.coder.generate(plan)
-
-        print("Step 3: Reviewing...")
         review = self.reviewer.review(code)
-
-        print("Step 4: Testing...")
-        test_report = self.tester.test(code)
+        test = self.tester.test(code)
 
         return {
             "plan": plan,
             "code": code,
             "review": review,
-            "test": test_report
+            "test": test,
         }
